@@ -1,0 +1,35 @@
+---
+server_name: localhost.phpipam #Nginx server_name, change it to your website e.g: rbgeek.com
+
+# phpIPAM MySQL database configuration
+phpipam_database_user: 'root'
+phpipam_database_host: 'localhost'
+phpipam_database_name: 'phpipam'
+phpipam_database_password: "toor"
+
+# ---- Base application directories ----
+
+# Base path for git bare repository with phpIPAM source
+phpipam_src: '/vagrant/repo/phpipam'
+
+# Base web root directory for phpIPAM website
+phpipam_www: '/var/www/html/phpipam'
+
+# phpIPAM webserver user (needs read-only access to the website code)
+phpipam_webserver_user: 'www-data'
+phpipam_group: 'www-data'
+phpipam_user: 'www-data'
+
+# ---- git repository and checkout ----
+
+# phpIPAM source repository
+phpipam_git_repo: 'https://github.com/phpipam/phpipam.git'
+
+# phpIPAM source directory on the host
+phpipam_git_dest: '/vagrant/repo/phpipam'
+
+# phpIPAM database schema loaded by Ansible
+phpipam_database_schema: '/vagrant/repo/phpipam/db/SCHEMA.sql'
+
+
+

@@ -1,0 +1,17 @@
+[phpipam]
+phpipam ip=10.0.1.10 ansible_ssh_host=10.0.1.10 ansible_ssh_pass=vagrant ansible_ssh_user=vagrant
+
+[junos]
+spine01 ip=10.0.1.2 ansible_ssh_host=10.0.1.2
+spine02 ip=10.0.1.6 ansible_ssh_host=10.0.1.6
+
+[junos:vars]
+ansible_user=root
+ansible_ssh_pass=Juniper
+ansible_ssh_port=22
+
+[phpipam:vars]
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+ansible_ssh_port=22
+become_method: sudo
