@@ -11,7 +11,7 @@
    sudo: yes
    gather_facts: yes
    roles:
-     - lemp
+     #- lemp
      - phpmyadmin
-     - phpipam
+     #- phpipam
     
