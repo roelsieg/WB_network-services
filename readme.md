@@ -31,13 +31,13 @@ vagrant up
 ### System description
 Machines:
 * ansible - running Ansible etc.
-* vt-ubun - virtual test server to deploy phpipam / or other onto
+* vt-ubun - virtual test server to deploy networktools
 * spine01 - a Junos machine 
 * spine02 - a Junos machine
 
 
 The Ansible host has roughly the following installed:
-* A Python build with all essentials to run Ansible
+* A Python3 build with all essentials to run Ansible
 * Ansible - provisioning, configuration management tool
 * Napalm - Network Automation and Programmability Abstraction Layer with Multivendor support
 
@@ -46,19 +46,18 @@ The Junos hosts used to test are : juniper/ffp-12.1X47-D15.4-packetmode (fetched
 ### Network design
 ```
  Workbench Topology
-                                    
                           +---------+       
                           | spine01 |----+  
                           +---------+    |  
-                                e1|      |   
-                                  |      |   
-                                  |      |   
-                                  |   +---------+
-                                  |   | ansible |
-                                  |   +---------+
-                                  |      |  | 
-                                  |      |  | 
-                                e1|      |  |       
+                            |e1 e2|      |   
+                            |     |      |   
+                            |     |      |   
+                            |     |   +---------+
+                            |     |   | ansible |
+                            |     |   +---------+
+                            |     |      |  | 
+                            |     |      |  | 
+                            |e1 e2|      |  |       
  +---------+              +---------+    |  |
  | vt-ubun |              | spine02 |----+  |
  +---------+              +---------+       |
