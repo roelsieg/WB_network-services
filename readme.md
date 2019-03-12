@@ -69,7 +69,7 @@ The Junos hosts used to test are : juniper/ffp-12.1X47-D15.4-packetmode (fetched
 Start off course with the Prerequisites and Installation. 
 Then test the setup by running a first playbook:
 
-[playbook_0.yml](./provision/playbooks.md#playbook_0)
+[pb_phpipam.yml](./provision/playbooks.md)
 ```
 vagrant ssh ansible
 sudo ansible-playbook provision/playbook_0.yml
