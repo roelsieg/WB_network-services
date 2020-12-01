@@ -3,7 +3,7 @@
 - name: Install Git
   apt:
     name: git
-    state: installed
+    state: present
     update_cache: yes
 
 
@@ -22,7 +22,7 @@
     repo: '{{ phpipam_git_repo }}'
     dest: '{{ phpipam_git_dest }}'
     update: yes
-  sudo: yes
+  become: true
   register: phpipam_register_source
 
 - name: Create phpIPAM destination directory
@@ -75,6 +75,7 @@
   mysql_db:
     name: '{{ phpipam_database_name }}'
     state: 'present'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   when: phpipam_database_host == 'localhost' and phpipam_register_mysql.stat.exists
   register: phpipam_register_database_status
 
@@ -83,6 +84,7 @@
     name: '{{ phpipam_database_name }}'
     state: 'import'
     target: '{{ phpipam_database_schema }}'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   when: (phpipam_database_host == 'localhost' and
          (phpipam_register_database_status is defined and phpipam_register_database_status.changed) and
          (phpipam_register_configuration is defined and not phpipam_register_configuration.stat.exists))

@@ -66,6 +66,15 @@ The Junos hosts used to test are : juniper/ffp-12.1X47-D15.4-packetmode (fetched
 ```
 ## Running the playbooks
 
+Temp setting on vt_ubun:
+
+```
+sudo vi /etc/ssh/sshd_config
+PasswordAuthentication yes
+```
+
+sudo /etc/init.d/ssh restart
+
 Start off course with the Prerequisites and Installation. 
 Then test the setup by running a first playbook:
 

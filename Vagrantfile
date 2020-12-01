@@ -34,11 +34,11 @@ Vagrant.configure(2) do |config|
     vb.gui = false
   end
   config.vm.define 'ansible' do |ansible|
-	  ansible.vm.box = "ubuntu/bionic64"
+	  ansible.vm.box = "ubuntu/focal64"
 	  ansible.vm.network :forwarded_port, guest: 22, host: 12202, id: 'ssh'
 	  ansible.vm.network "private_network", virtualbox__intnet: "ans_s01",
                     ip: "10.0.1.1",
-                    netmask: "255.255.255.252",									  
+                    netmask: "255.255.255.252",
 									  auto_config: true
 	  ansible.vm.network "private_network", virtualbox__intnet: "ans_s02",
                     ip: "10.0.1.5",
@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define 'vt_ubun' do |vt_ubun|
-	  vt_ubun.vm.box = "ubuntu/bionic64"
+	  vt_ubun.vm.box = "ubuntu/xenial64"
 	  vt_ubun.vm.provider "virtualbox" do |vb|
 		  vb.memory = 8192
 		  vb.cpus = 2
@@ -67,9 +67,10 @@ Vagrant.configure(2) do |config|
 	  vt_ubun.vm.network :forwarded_port, guest: 22, host: 12203, id: 'ssh'
 	  vt_ubun.vm.network "private_network", virtualbox__intnet: "ans_ipam",
                     ip: "10.0.1.10",
-                    netmask: "255.255.255.252",									  
+                    netmask: "255.255.255.252",
 									  auto_config: true
     end
+
   config.vm.define 'spine01' do |spine01|
 	  spine01.vm.host_name = "spine01"
 	  spine01.vm.network :forwarded_port, guest: 22, host: 2204, id: 'ssh'

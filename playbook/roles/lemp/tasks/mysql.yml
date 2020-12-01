@@ -2,16 +2,23 @@
 - name: Install the MySQL packages
   apt:
     name: "{{ item }}"
-    state: installed
+    state: present
     update_cache: yes
   with_items: "{{ ubuntu_mysql_pkgs }}"
+
+- name: Make sure pymysql is present
+  become: true # needed if the other tasks are not played as root
+  pip:
+    name: pymysql
+    state: present
 
 - name: Update MySQL root password for all root accounts 
   mysql_user:
     name: root
     host: "{{ item }}"
     password: "{{ mysql_root_pass }}"
-    state: present
+    # state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   with_items:
     - "{{ ansible_hostname }}"
     - 127.0.0.1
@@ -36,6 +43,7 @@
     name: ''
     host: "{{ item }}"
     state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   with_items:
     - localhost
     - "{{ ansible_hostname }}"
@@ -44,5 +52,6 @@
   mysql_db:
     name: test
     state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   notify:
     - Restart MySQL 

@@ -1,11 +1,11 @@
 ---
-- name: Install the PHP5 Repository 
+- name: Install the PHP Repository 
   apt_repository:
     repo: 'ppa:ondrej/php'
-    #repo: 'ppa:ondrej/php5-5.6'
+    # repo: 'ppa:ondrej/php5-5.6'
     state: present
 
-- name: Install PHP5-FPM
+- name: Install PHP7-FPM
   apt:
     name: "{{ item }}"
     state: latest
@@ -19,7 +19,7 @@
     owner: root
     group: root
   with_items:
-    - { src: 'www.conf.j2', dest: '/etc/php5/fpm/pool.d/www.conf' }
-    - { src: 'php.ini.j2', dest: '/etc/php5/fpm/php.ini' }
+    - { src: 'www.conf.j2', dest: '/etc/php/7.2/fpm/pool.d/www.conf' }
+    - { src: 'php.ini.j2', dest: '/etc/php/7.2/fpm/php.ini' }
   notify:
     - Restart PHP5-FPM

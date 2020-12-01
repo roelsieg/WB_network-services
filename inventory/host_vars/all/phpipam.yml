@@ -1,5 +1,0 @@
----
-ansible_user: {{ vt-ubun_ansible_user_vault }}
-ansible_ssh_pass: {{ vt-ubun_ansible_pass_vault }}
-ansible_ssh_port: 22
-sudo: yes

@@ -7,7 +7,7 @@
 - name: Install Nginx
   apt:
     name: nginx
-    state: installed
+    state: present
     update_cache: yes
 
 - name: Copy the templates to their respestive destination
