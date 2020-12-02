@@ -1,6 +1,7 @@
 # Ignore Vagrant directories
 .vagrant
 /topology.yml
+*.-cloudimg-console.log
 
 #Ignore fetched external repo(s)
 vagrant-junos

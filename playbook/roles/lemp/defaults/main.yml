@@ -8,7 +8,7 @@ server_name: localhost #Nginx server_name, change it to your website e.g: rbgeek
 ubuntu_mysql_pkgs:
   - mysql-server
   - mysql-client
-  - python-mysqldb
+  - python3-mysqldb
   - libmysqlclient-dev
   - python3-pip
 

@@ -57,13 +57,15 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define 'vt_ubun' do |vt_ubun|
-	  vt_ubun.vm.box = "ubuntu/xenial64"
+	  vt_ubun.vm.box = "ubuntu/bionic64"
+    # vt_ubun.vm.box = "ubuntu/focal64"
+    # vt_ubun.vm.box = "ubuntu/xenial64"
 	  vt_ubun.vm.provider "virtualbox" do |vb|
 		  vb.memory = 8192
 		  vb.cpus = 2
 		  vb.gui = false
 	  end
-	  vt_ubun.vm.network :forwarded_port, guest: 80, host: 8080, id: 'http'
+	  vt_ubun.vm.network :forwarded_port, guest: 80, host: 80, id: 'http'
 	  vt_ubun.vm.network :forwarded_port, guest: 22, host: 12203, id: 'ssh'
 	  vt_ubun.vm.network "private_network", virtualbox__intnet: "ans_ipam",
                     ip: "10.0.1.10",
