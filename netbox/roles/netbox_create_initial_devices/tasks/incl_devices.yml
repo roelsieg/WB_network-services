@@ -1,0 +1,108 @@
+# READ DEVICE DATA TO BE ABLE TO VERIFY IF DEVICE HAS ALREADY BEEN CREATED
+- name: read device data
+  include_role:
+    name: netbox_read_device_data
+  vars:
+    device_name: "{{ device.device_name }}" # device(list) looped by include from inventory devices
+
+# CREATE DEVICE ON SITE GENERATED OR GIVEN BY INVENTORY
+- name: Create device on site within Netbox from inventory sample data
+  netbox.netbox.netbox_device:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ device.device_name }}"
+      tenant: "{{ device.tenant }}"
+      device_type: "{{ device.device_type }}"
+      device_role: "{{ device.device_role }}"
+      tags: "{{ device.tags }}"
+      site: "{{ device.site_name | default(site_response.json.name) }}"
+      vc_position: "{{ device.vc_position | default(omit) }}"
+      status: "{{ device.status | default('Active') }}"
+    state: present
+  when:
+    - not device_data.0.name is defined
+
+- name: Create virtual chassis within Netbox from inventory sample data
+  netbox_virtual_chassis:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ device.virtual_chassis }}"
+      master: "{{ device.vc_master }}"
+    state: present
+  when:
+    - not device_data.0.name is defined
+    - device.vc_master is defined
+
+# UPDATE DEVICE ON SITE GENERATED OR GIVEN BY INVENTORY
+- name: Create device on site within Netbox from inventory sample data
+  netbox.netbox.netbox_device:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ device.device_name }}"
+      tenant: "{{ device.tenant }}"
+      device_type: "{{ device.device_type }}"
+      device_role: "{{ device.device_role }}"
+      tags: "{{ device.tags }}"
+      site: "{{ device.site_name | default(site_response.json.name) }}"
+      virtual_chassis: "{{ device.virtual_chassis | default(omit) }}"
+      vc_position: "{{ device.vc_position | default(omit) }}"
+      status: "{{ device.status | default('Active') }}"
+    state: present
+  when:
+    - not device_data.0.name is defined
+    - device.vc_master is defined
+
+# CREATE INTERFACES ON DEVICE
+# NEEDED IF NOT CREATED ON DEVICE_TYPE (Example: VARIABLE LINE CARD, SFP)
+- name: Create interface on device within Netbox from inventory sample data
+  netbox.netbox.netbox_device_interface:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      device: "{{ device.device_name }}"
+      name: "{{ int.int_name }}"
+      type: "{{ int.type | default(omit) }}"
+      enabled: "{{ int.enabled | default(omit) }}"
+      lag: "{{ int.lag | default(omit) }}"
+      # TODO: FIX API IF DESIRED
+      # parent: "{{ int.parent | default(omit) }}"
+      mode: "{{ int.mode | default(omit) }}"
+      tagged_vlans: "{{ int.tagged_vlans | default(omit) }}"
+    state: present
+  loop: "{{ device.interfaces }}"
+  loop_control:
+    loop_var: int
+  when:
+    - not device_data.0.name is defined
+    - device.interfaces is defined
+
+# CREATE INTERFACES RANGES ON DEVICE
+# NEEDED IF NOT CREATED ON DEVICE_TYPE (Example: VARIABLE LINE CARD, SFP)
+- name: Include tasks to create interface ranges
+  include_tasks: incl_int_ranges.yml
+  loop: "{{ device.interface_ranges }}"
+  loop_control:
+    loop_var: int_range
+  when:
+    - not device_data.0.name is defined
+    - device.interface_ranges is defined
+
+# TODO: FETCH NTP IPS TO BE USED BY TAGS (DEFAULT+NTP)
+- name: Set fact `ntp_ips`
+  set_fact:
+    ntp_ips:
+      ntp_server_01: "192.168.100.101"
+      ntp_server_02: "192.168.100.102"
+
+# IF DEFINED AS PRIMARY ADJUST SETTING ON DEVICE
+- name: Set custom NTP IPs within Netbox
+  netbox.netbox.netbox_device:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ device.device_name }}"
+      custom_fields : "{{ ntp_ips }}"
+    state: "present"

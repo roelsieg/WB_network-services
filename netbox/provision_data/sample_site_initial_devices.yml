@@ -1,0 +1,319 @@
+---
+manufacturers:
+  - vendor_name: "Cisco"
+    description: "Cisco Systems, Inc."
+  - vendor_name: "Fortinet"
+    description: "Fortinet, Inc."
+
+device_types:
+  - manufacturer: Cisco
+    # from https://github.com/netbox-community/devicetype-library/tree/master/device-types/Cisco
+    model: ASA5545-X
+    slug: asa5545-x
+    part_number: ASA5545-K8
+    u_height: 1
+    is_full_depth: true
+    console_ports:
+      - name: Con 0
+        type: rj-45
+    power_ports:
+      - name: PS0
+        type: iec-60320-c14
+      - name: PS1
+        type: iec-60320-c14
+    interfaces:
+      - name: GigabitEthernet0/0
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/1
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/2
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/3
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/4
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/5
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/6
+        type: 1000base-t
+        mgmt_only: false
+      - name: GigabitEthernet0/7
+        type: 1000base-t
+        mgmt_only: false
+      - name: Management0/0
+        type: 1000base-t
+        mgmt_only: true
+  - manufacturer: Cisco
+    # from https://github.com/netbox-community/devicetype-library/tree/master/device-types/Cisco
+    model: Catalyst 9410R
+    slug: c9410r
+    part_number: C9410R
+    u_height: 13
+    is_full_depth: true
+    console_ports:
+      - name: con 0
+        type: rj-45
+    power_ports:
+      - name: PS-1
+        type: iec-60320-c14
+        maximum_draw: 3190
+      - name: PS-2
+        type: iec-60320-c14
+        maximum_draw: 3190
+    interfaces:
+      - name: GigabitEthernet0/0
+        type: 1000base-t
+        mgmt_only: true
+  - manufacturer: Cisco
+    # from https://github.com/netbox-community/devicetype-library/tree/master/device-types/Cisco
+    model: Catalyst C4510R+E
+    slug: ws-c4510r_plus_e
+    part_number: WS-C4510R+E
+    u_height: 14
+    is_full_depth: true
+    subdevice_role: parent
+    console_ports:
+      - name: con0
+        type: rj-45
+    power_ports:
+      - name: PS1
+        type: iec-60320-c14
+        maximum_draw: 1400
+      - name: PS2
+        type: iec-60320-c14
+        maximum_draw: 1400
+    interfaces:
+      - name: FastEthernet1
+        type: 100base-tx
+        mgmt_only: true
+  - manufacturer: Cisco
+    model: Catalyst 4506-E
+    slug: ws-c4506-e
+    part_number: WS-C4506-E
+    u_height: 10
+    is_full_depth: true
+    subdevice_role: parent
+    console_ports:
+      - name: con0
+        type: rj-45
+    power_ports:
+      - name: PS1
+        type: iec-60320-c14
+        maximum_draw: 1500
+      - name: PS2
+        type: iec-60320-c14
+        maximum_draw: 1500
+    interfaces:
+      - name: FastEthernet1
+        type: 100base-tx
+        mgmt_only: true
+  - manufacturer: Cisco
+    model: Aironet 3702I-E
+    slug: air-cap3702i-e-k9
+    part_number: AIR-CAP3702I-E-K9
+    u_height: 0
+    is_full_depth: false
+    console_ports:
+      - name: con0
+        type: rj-45
+    interfaces:
+      - name: WiFi_5Ghz
+        type: ieee802.11ac
+        mgmt_only: false
+      - name: WiFi_2.4Ghz
+        type: ieee802.11n
+        mgmt_only: false
+      - name: GigabitEthernet0
+        type: 1000base-t
+        mgmt_only: false
+
+device_roles:
+  - dr_name: "firewall"
+    description: "Firewall"
+    color: "8b0000" # dark red
+  - dr_name: "l3-switch"
+    description: "Layer3 switch"
+    color: "0000FF" # blue
+  - dr_name: "l2-switch"
+    description: "Layer2 switch"
+    color: "ADD8E6" # light blue
+  - dr_name: "wifi-ap"
+    description: "Wifi Accespoint"
+    color: "008080" # teal
+
+virtual_chassis:
+  - name: "TLD-SITE-FW5545-X"
+    master: "TLD-SITE-FW5545-X-1"
+
+devices:
+  - device_name: "TLD-SITE-FW5545-X-1"
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "asa5545-x"
+    device_role: "firewall"
+    virtual_chassis: "TLD-SITE-FW5545-X"
+    vc_position: 1
+    vc_master: "TLD-SITE-FW5545-X-1"
+    tags:
+      - "lan"
+      - "wan"
+    interfaces:
+      - int_name: "po3"
+        type: "Link Aggregation Group (LAG)"
+      - int_name: "po4"
+        type: "Link Aggregation Group (LAG)"
+      - int_name: "po4.200"
+        type: "Virtual"
+        # TODO: FIX WITH API ONLY
+        # parent: "po4"
+        mode: "tagged"
+        tagged_vlans:
+          - vid: "200"
+      - int_name: "vlan_201"
+        type: "Virtual"
+        mode: "tagged"
+        tagged_vlans:
+          - vid: "201"
+      - int_name: GigabitEthernet0/3
+        lag: "po3"
+      - int_name: GigabitEthernet0/4
+        lag: "po4"
+  - device_name: TLD-SITE-FW5545-X-2
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "asa5545-x"
+    device_role: "firewall"
+    virtual_chassis: "TLD-SITE-FW5545-X"
+    vc_position: 2
+    vc_master: "TLD-SITE-FW5545-X-1"
+    tags:
+      - "lan"
+      - "wan"
+    # TODO: FIX LAG ASSIGNED OVER MULTIPLE DEVICE BY API URI POST
+    # interfaces:
+    #   - int_name: GigabitEthernet0/3
+    #     lag: "po3"
+    #   - int_name: GigabitEthernet0/4
+    #     lag: "po4"
+  - device_name: TLD-SITE-C9410-1
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "c9410r"
+    device_role: "L3-Switch"
+    tags:
+      - "lan"
+    interfaces:
+      - int_name: "vlan_100"
+        type: "Virtual"
+        mode: "tagged"
+        tagged_vlans:
+          - vid: "100"
+      - int_name: "vlan_101"
+        type: "Virtual"
+        mode: "tagged"
+        tagged_vlans:
+          - vid: "101"
+      - int_name: "vlan_102"
+        type: "Virtual"
+        mode: "tagged"
+        tagged_vlans:
+          - vid: "102"
+    interface_ranges:
+      - int_base_name: "ge-1/0/"
+        int_range_start: 0
+        int_range_stop: 23
+        type: "1000BASE-T (1GE)"
+        enabled: "no"
+      - int_base_name: "ten-5/0/"
+        int_range_start: 1
+        int_range_stop: 3
+        type: "10GBASE-T (10GE)"
+        enabled: "no"
+      - int_base_name: "ten-6/0/"
+        int_range_start: 1
+        int_range_stop: 3
+        type: "10GBASE-T (10GE)"
+        enabled: "no"
+      - int_base_name: "ge-7/0/"
+        int_range_start: 0
+        int_range_stop: 23
+        type: "1000BASE-T (1GE)"
+        enabled: "no"
+  - device_name: TLD-SITE-C4510-3
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "ws-c4510r_plus_e"
+    device_role: "L2-Switch"
+    tags:
+      - "lan"
+    interfaces:
+      - int_name: "ten-5/0/1"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+      - int_name: "ten-5/0/2"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+      - int_name: "ten-5/0/3"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+      - int_name: "ten-5/0/4"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+    interface_ranges:
+      - int_base_name: "ge-1/0/"
+        int_range_start: 0
+        int_range_stop: 23
+        type: "1000BASE-T (1GE)"
+        enabled: "no"
+  - device_name: TLD-SITE-C4510-1
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "ws-c4510r_plus_e"
+    device_role: "L2-Switch"
+    tags:
+      - "lan"
+    interfaces:
+      - int_name: "ten-5/0/1"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+      - int_name: "ten-5/0/2"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+    interface_ranges:
+      - int_base_name: "ge-1/0/"
+        int_range_start: 0
+        int_range_stop: 23
+        type: "1000BASE-T (1GE)"
+        enabled: "no"
+  - device_name: TLD-SITE-C4506-2
+    tenant: "Tenant"
+    region: "offices"
+    site_name: "SITE_office"
+    device_type: "ws-c4506-e"
+    device_role: "L2-Switch"
+    tags:
+      - "lan"
+    interfaces:
+      - int_name: "ten-1/0/1"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+      - int_name: "ten-1/0/2"
+        type: "10GBASE-T (10GE)"
+        enabled: "yes"
+    interface_ranges:
+      - int_base_name: "ge-2/0/"
+        int_range_start: 0
+        int_range_stop: 23
+        type: "1000BASE-T (1GE)"
+        enabled: "no"

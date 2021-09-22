@@ -1,0 +1,38 @@
+---
+# - name: "Run cleanup function on site_name variable"
+#   set_fact:
+#     cleaned_site_name: "{{ site_name | snow_cleanup_site_name }}"
+#   run_once: True
+
+- name: "Device data from Netbox"
+  uri:
+    url: "{{ netbox.apiurl }}/dcim/devices/?q={{ device_name }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.apitoken }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: device_data
+
+# - name: "debug site device_initial"
+#   debug:
+#     msg: "{{ device_data }}"
+
+- name: "setting site_devices variable"
+  set_fact:
+    device_data: "{{ device_data.json.results }}"
+
+# - name: "debug site device after set fact variables"
+#   debug:
+#     msg: "{{ device_data }}"
+
+# - name: "cleaning up site data into dictionary values"
+#   set_fact:
+#     device_data: "{{ device_data | cleanup_device_data }}"
+
+# - name: "debug site device after clean-up"
+#   debug:
+#     msg: "{{ device_data }}"

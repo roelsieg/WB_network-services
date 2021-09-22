@@ -1,0 +1,4 @@
+---
+# ansible_user: {{ junos_ansible_user_vault }}
+# ansible_ssh_pass: {{ junos_ansible_pass_vault }}
+ansible_ssh_port: 22

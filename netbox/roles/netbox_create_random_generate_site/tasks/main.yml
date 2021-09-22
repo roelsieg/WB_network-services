@@ -1,0 +1,73 @@
+---
+# READ DEVICE DATA TO BE ABLE TO VERIFY IF DEVICE HAS ALREADY BEEN CREATED
+- name: read device data
+  include_role:
+    name: netbox_read_device_data
+  vars:
+    device_name: "{{ device.device_name }}" # device(list) looped by include from inventory devices
+
+# CREATE A RANDOM GENERATED SITE FROM ONLINE DATA IF NO SITE PROVIDED
+- name: "random site generator"
+  uri:
+    url: https://api.namefake.com/english-united-states
+    method: GET
+    return_content: yes
+    status_code: 200
+    body_format: json
+  register: random_name
+  when:
+    - not device_data.0.name is defined # device_data read doesn't contain "name" (already created)
+- name: "creating a variable based on the payload from previous step"
+  set_fact:
+    site_name: "{{ random_name.json }}"
+  when:
+    - not device_data.0.name is defined
+- name: "building the k/v pair for the payload"
+  set_fact:
+    site: "{{ site_name | netbox_site_builder }}"
+  when:
+    - not device_data.0.name is defined
+- name: Update the configurations within Netbox
+  uri:
+    url: "{{ netbox.apiurl }}/dcim/sites/"
+    headers:
+      Authorization: "token {{ netbox.apitoken }}"
+    return_content: yes
+    status_code: 201
+    method: POST
+    body: "{{ site | to_json }}"
+    body_format: json
+  register: site_response
+  when:
+    - not device_data.0.name is defined
+
+# UPDATE SITE TENANT
+- name: Update site Tenant information within Netbox
+  netbox_site:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ site_response.json.name }}"
+      tenant: "{{ device.tenant }}"
+      region: "{{ device.region }}"
+    state: present
+  when:
+    - not device_data.0.name is defined
+    - not device.site_name is defined
+
+# CREATE DEVICE ON SITE GENERATED OR GIVEN BY INVENTORY
+- name: Create device on site within Netbox from inventory sample data
+  netbox.netbox.netbox_device:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ device.device_name }}"
+      tenant: "{{ device.tenant }}"
+      device_type: "{{ device.device_type }}"
+      device_role: "{{ device.device_role }}"
+      tags: "{{ device.tags }}"
+      site: "{{ site_response.json.name }}"
+      status: "{{ device.status | default('Active') }}"
+    state: present
+  when:
+    - not device_data.0.name is defined

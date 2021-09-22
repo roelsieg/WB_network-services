@@ -1,0 +1,1077 @@
+No config file found; using defaults
+Fetching: http://localhost:8000/api/docs/?format=openapi
+Fetching: http://localhost:8000/api/dcim/devices/?limit=0&role=firewall&site=site_office&exclude=config_context
+Fetching: http://localhost:8000/api/virtualization/virtual-machines/?limit=0&role=firewall&site=site_office&exclude=config_context
+Fetching: http://localhost:8000/api/dcim/sites/?limit=0
+Fetching: http://localhost:8000/api/dcim/regions/?limit=0
+Fetching: http://localhost:8000/api/dcim/locations/?limit=0
+Fetching: http://localhost:8000/api/dcim/racks/?limit=0
+Fetching: http://localhost:8000/api/tenancy/tenants/?limit=0
+Fetching: http://localhost:8000/api/dcim/device-roles/?limit=0
+Fetching: http://localhost:8000/api/dcim/platforms/?limit=0
+Fetching: http://localhost:8000/api/dcim/device-types/?limit=0
+Fetching: http://localhost:8000/api/dcim/manufacturers/?limit=0
+Fetching: http://localhost:8000/api/virtualization/clusters/?limit=0
+Fetching: http://localhost:8000/api/dcim/interfaces/?limit=0
+Fetching: http://localhost:8000/api/ipam/services/?limit=0
+Fetching: http://localhost:8000/api/virtualization/interfaces/?limit=0
+Fetching: http://localhost:8000/api/ipam/ip-addresses/?limit=0&assigned_to_interface=true
+{
+    "_meta": {
+        "hostvars": {
+            "TLD-SITE-FW5545-X-1": {
+                "custom_fields": {
+                    "ntp_server_01": "192.168.100.101",
+                    "ntp_server_02": "192.168.100.102"
+                },
+                "device_roles": [
+                    "firewall"
+                ],
+                "device_types": [
+                    "asa5545-x"
+                ],
+                "interfaces": [
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/0",
+                        "enabled": true,
+                        "id": 114,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.067607Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/0",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/114/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/1",
+                        "enabled": true,
+                        "id": 115,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.067732Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/1",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/115/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/2",
+                        "enabled": true,
+                        "id": 116,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.067833Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/2",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/116/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/3",
+                        "enabled": true,
+                        "id": 117,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": {
+                            "_occupied": false,
+                            "cable": null,
+                            "device": {
+                                "display": "TLD-SITE-FW5545-X-1",
+                                "id": 8,
+                                "name": "TLD-SITE-FW5545-X-1",
+                                "url": "http://localhost:8000/api/dcim/devices/8/"
+                            },
+                            "display": "po3",
+                            "id": 123,
+                            "name": "po3",
+                            "url": "http://localhost:8000/api/dcim/interfaces/123/"
+                        },
+                        "last_updated": "2021-08-31T19:54:58.680717Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/3",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/117/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/4",
+                        "enabled": true,
+                        "id": 118,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": {
+                            "_occupied": false,
+                            "cable": null,
+                            "device": {
+                                "display": "TLD-SITE-FW5545-X-1",
+                                "id": 8,
+                                "name": "TLD-SITE-FW5545-X-1",
+                                "url": "http://localhost:8000/api/dcim/devices/8/"
+                            },
+                            "display": "po4",
+                            "id": 124,
+                            "name": "po4",
+                            "url": "http://localhost:8000/api/dcim/interfaces/124/"
+                        },
+                        "last_updated": "2021-08-31T19:54:59.512332Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/4",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/118/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/5",
+                        "enabled": true,
+                        "id": 119,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.068117Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/5",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/119/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/6",
+                        "enabled": true,
+                        "id": 120,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.068229Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/6",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/120/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "GigabitEthernet0/7",
+                        "enabled": true,
+                        "id": 121,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.068336Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/7",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/121/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "Management0/0",
+                        "enabled": true,
+                        "id": 122,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:54.068439Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": true,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "Management0/0",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/122/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "po3",
+                        "enabled": true,
+                        "id": 123,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:56.165521Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "po3",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "Link Aggregation Group (LAG)",
+                            "value": "lag"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/123/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "po4",
+                        "enabled": true,
+                        "id": 124,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:56.678996Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "po4",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "Link Aggregation Group (LAG)",
+                            "value": "lag"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/124/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 2,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "po4.200",
+                        "enabled": true,
+                        "id": 125,
+                        "ip_addresses": [
+                            {
+                                "address": "192.168.200.1/24",
+                                "created": "2021-08-31",
+                                "custom_fields": {},
+                                "description": "",
+                                "display": "192.168.200.1/24",
+                                "dns_name": "",
+                                "family": {
+                                    "label": "IPv4",
+                                    "value": 4
+                                },
+                                "id": 9,
+                                "last_updated": "2021-08-31T20:10:53.269886Z",
+                                "nat_inside": null,
+                                "nat_outside": null,
+                                "role": null,
+                                "status": {
+                                    "label": "Active",
+                                    "value": "active"
+                                },
+                                "tags": [],
+                                "tenant": null,
+                                "url": "http://localhost:8000/api/ipam/ip-addresses/9/",
+                                "vrf": null
+                            },
+                            {
+                                "address": "192.168.200.2/24",
+                                "created": "2021-08-31",
+                                "custom_fields": {},
+                                "description": "",
+                                "display": "192.168.200.2/24",
+                                "dns_name": "",
+                                "family": {
+                                    "label": "IPv4",
+                                    "value": 4
+                                },
+                                "id": 10,
+                                "last_updated": "2021-08-31T20:10:53.792619Z",
+                                "nat_inside": null,
+                                "nat_outside": null,
+                                "role": null,
+                                "status": {
+                                    "label": "Active",
+                                    "value": "active"
+                                },
+                                "tags": [],
+                                "tenant": null,
+                                "url": "http://localhost:8000/api/ipam/ip-addresses/10/",
+                                "vrf": null
+                            }
+                        ],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:57.280248Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": {
+                            "label": "Tagged",
+                            "value": "tagged"
+                        },
+                        "mtu": null,
+                        "name": "po4.200",
+                        "parent": null,
+                        "tagged_vlans": [
+                            {
+                                "display": "SITE-DMZ-MGMT (200)",
+                                "id": 4,
+                                "name": "SITE-DMZ-MGMT",
+                                "url": "http://localhost:8000/api/ipam/vlans/4/",
+                                "vid": 200
+                            }
+                        ],
+                        "tags": [],
+                        "type": {
+                            "label": "Virtual",
+                            "value": "virtual"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/125/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-1",
+                            "id": 8,
+                            "name": "TLD-SITE-FW5545-X-1",
+                            "url": "http://localhost:8000/api/dcim/devices/8/"
+                        },
+                        "display": "vlan_201",
+                        "enabled": true,
+                        "id": 126,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:54:57.899566Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": {
+                            "label": "Tagged",
+                            "value": "tagged"
+                        },
+                        "mtu": null,
+                        "name": "vlan_201",
+                        "parent": null,
+                        "tagged_vlans": [
+                            {
+                                "display": "SITE-DMZ-AP (201)",
+                                "id": 5,
+                                "name": "SITE-DMZ-AP",
+                                "url": "http://localhost:8000/api/ipam/vlans/5/",
+                                "vid": 201
+                            }
+                        ],
+                        "tags": [],
+                        "type": {
+                            "label": "Virtual",
+                            "value": "virtual"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/126/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/0",
+                        "enabled": true,
+                        "id": 127,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521131Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/0",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/127/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/1",
+                        "enabled": true,
+                        "id": 128,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521253Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/1",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/128/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/2",
+                        "enabled": true,
+                        "id": 129,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521351Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/2",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/129/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/3",
+                        "enabled": true,
+                        "id": 130,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521446Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/3",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/130/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/4",
+                        "enabled": true,
+                        "id": 131,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521539Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/4",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/131/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/5",
+                        "enabled": true,
+                        "id": 132,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521632Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/5",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/132/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/6",
+                        "enabled": true,
+                        "id": 133,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521749Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/6",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/133/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "GigabitEthernet0/7",
+                        "enabled": true,
+                        "id": 134,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521853Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": false,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "GigabitEthernet0/7",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/134/"
+                    },
+                    {
+                        "_occupied": false,
+                        "cable": null,
+                        "cable_peer": null,
+                        "cable_peer_type": null,
+                        "connected_endpoint": null,
+                        "connected_endpoint_reachable": null,
+                        "connected_endpoint_type": null,
+                        "count_ipaddresses": 0,
+                        "created": "2021-08-31",
+                        "custom_fields": {},
+                        "description": "",
+                        "device": {
+                            "display": "TLD-SITE-FW5545-X-2",
+                            "id": 9,
+                            "name": "TLD-SITE-FW5545-X-2",
+                            "url": "http://localhost:8000/api/dcim/devices/9/"
+                        },
+                        "display": "Management0/0",
+                        "enabled": true,
+                        "id": 135,
+                        "ip_addresses": [],
+                        "label": "",
+                        "lag": null,
+                        "last_updated": "2021-08-31T19:55:01.521954Z",
+                        "mac_address": null,
+                        "mark_connected": false,
+                        "mgmt_only": true,
+                        "mode": null,
+                        "mtu": null,
+                        "name": "Management0/0",
+                        "parent": null,
+                        "tagged_vlans": [],
+                        "tags": [],
+                        "type": {
+                            "label": "1000BASE-T (1GE)",
+                            "value": "1000base-t"
+                        },
+                        "untagged_vlan": null,
+                        "url": "http://localhost:8000/api/dcim/interfaces/135/"
+                    }
+                ],
+                "is_virtual": false,
+                "local_context_data": [
+                    null
+                ],
+                "locations": [],
+                "manufacturers": [
+                    "cisco"
+                ],
+                "regions": [
+                    "offices",
+                    "all_locations"
+                ],
+                "services": [],
+                "sites": [
+                    "site_office"
+                ],
+                "status": {
+                    "label": "Active",
+                    "value": "active"
+                },
+                "tags": [
+                    "lan",
+                    "wan"
+                ],
+                "tenants": [
+                    "tenant"
+                ]
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "device_roles_firewall",
+            "ungrouped"
+        ]
+    },
+    "device_roles_firewall": {
+        "hosts": [
+            "TLD-SITE-FW5545-X-1"
+        ]
+    }
+}

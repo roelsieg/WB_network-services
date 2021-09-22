@@ -1,0 +1,36 @@
+- name: "Device data from Netbox"
+  uri:
+    url: "{{ netbox.apiurl }}/extras/custom-fields/?name={{ custom_field.name }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.apitoken }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: read_custom_field
+
+- name: "setting site_devices variable"
+  set_fact:
+    read_custom_field: "{{ read_custom_field.json.results.0 }}"
+  when: read_custom_field.json.results.0 is defined
+
+- name: "BUILD TEMPLATE FOR custom_field {{ custom_field.name }}"
+  template:
+    src: custom_field.j2
+    dest: "custom_field-{{ custom_field.name }}.json"
+    mode: 0644
+  when: not read_custom_field.name is defined
+
+- name: Update the configurations within Netbox
+  uri:
+    url: "{{ netbox.apiurl }}/extras/custom-fields/"
+    headers:
+      Authorization: "token {{ netbox.apitoken }}"
+    return_content: yes
+    status_code: 201
+    method: POST
+    body: "{{ lookup('template', 'custom_field.j2') }}"
+    body_format: json
+  when: not read_custom_field.name is defined

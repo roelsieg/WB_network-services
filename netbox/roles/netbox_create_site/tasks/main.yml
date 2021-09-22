@@ -1,0 +1,19 @@
+---
+- name: "Create site within Netbox from inventory data"
+  netbox.netbox.netbox_site:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ site.name }}"
+      tenant: "{{ site.tenant_name }}"
+      region: "{{ site.region_name }}"
+      status: "{{ site.status | default('Active') }}"
+      time_zone: "{{ site.time_zone }}"
+      physical_address: "{{ site.physical_address }}"
+      latitude: "{{ site.latitude }}"
+      longitude: "{{ site.longitude }}"
+      contact_name: "{{ site.contact_name | default(omit) }}"
+      contact_phone: "{{ site.contact_phone | default(omit) }}"
+      contact_email: "{{ site.contact_email | default(omit) }}"
+      slug: "{{ site.slug | default(site.name) }}"
+    state: present

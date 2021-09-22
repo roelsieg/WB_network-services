@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  name: netbox_debug
+  author: 'KPN/AC'
+  description: 'Debug Netbox data'
+  min_ansible_version: 2.x
+  license: COPYING
+  platforms:
+    - name: NetBox
+
+dependencies:
+# - role: netbox_debug
+
+collections:
+#  - xxx.xxx

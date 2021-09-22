@@ -1,0 +1,17 @@
+---
+# - name: Get Facts
+#   hosts: junos
+#   roles:
+#     - juniper.junos
+#   connection: local
+#   gather_facts: no
+   
+- name: provision phpipam
+  hosts: vt-ubun
+  become: true
+  gather_facts: yes
+  roles:
+    - lemp
+    # - phpmyadmin
+    - phpipam
+    

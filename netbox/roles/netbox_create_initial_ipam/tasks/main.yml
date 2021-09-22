@@ -1,0 +1,55 @@
+---
+# CREATE IPAM ROLES TO USE IN CREATION OF POOL PREFIXES
+- name: Create ipam role within Netbox from inventory sample data
+  netbox_ipam_role:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ rl.role_name }}"
+      slug: "{{ rl.role_name }}"
+    state: present
+  loop: "{{ roles }}"
+  loop_control:
+    loop_var: rl
+
+# CREATE VLANS FORM INVENTORY VLANS
+- name: Create vlan within Netbox from inventory sample data
+  netbox_vlan:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ vlan.vlan }}"
+      vid: "{{ vlan.vid }}"
+      tenant: "{{ vlan.tenant }}"
+      site: "{{ vlan.site | default(omit) }}"
+      status: "active"
+    state: present
+  loop: "{{ prefixes }}"
+  loop_control:
+    loop_var: vlan
+  when: vlan.vlan is defined
+
+# CREATE PREFIX POOLS WITH ROLES ASSIGNED FORM INVENTORY PREFIXES
+- name: Create prefix {{ pf.cidr }} within Netbox from inventory sample data
+  netbox.netbox.netbox_prefix:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      family: 4
+      prefix: "{{ pf.cidr }}"
+      tenant: "{{ pf.tenant }}"
+      description: "{{ pf.description }}"
+      prefix_role: "{{ pf.role | default(omit) }}"
+      site: "{{ pf.site | default(omit) }}"
+      vlan: "{{ pf.vlan | default(omit) }}"
+    state: present
+  loop: "{{ prefixes }}"
+  loop_control:
+    loop_var: pf
+
+# INCLUDE TASK LIST TO CREATE ASSIGMENTS OF PREFIX AND IPS TO DEVICES AND SITES
+- name: include assigment to devices
+  include_tasks: incl_assign.yml
+  loop: "{{ prefix_assign }}"
+  loop_control:
+    loop_var: pfa

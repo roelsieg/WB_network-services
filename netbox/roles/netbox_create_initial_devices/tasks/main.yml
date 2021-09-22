@@ -1,0 +1,49 @@
+---
+- name: Create manufacturers within Netbox from inventory sample data
+  netbox_manufacturer:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ mn.vendor_name }}"
+    state: present
+  loop: "{{ manufacturers }}"
+  loop_control:
+    loop_var: mn
+
+- name: Create device role within Netbox from inventory sample data
+  netbox_device_role:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ dr.dr_name }}"
+      description: "{{ dr.description }}"
+      color: "{{ dr.color }}"
+    state: present
+  loop: "{{ device_roles }}"
+  loop_control:
+    loop_var: dr
+
+# TODO: Read device type first and skip if defined
+# READ DEVICE TYPE DATA TO BE ABLE TO VERIFY IF DEVICE TYPE HAS ALREADY BEEN CREATED
+# - name: read device type data
+#   include_role:
+#     name: netbox_read_device_type_data
+#   vars:
+#     device_type_name: "{{ dt.device_name }}"
+#
+# TODO: Loop with include needed to get "device_type_data" proper parsed for idempotent check
+- name: Create device types within Netbox from inventory sample data
+  include_role:
+    name: netbox_create_device_type
+  loop: "{{ device_types }}"
+  loop_control:
+    loop_var: dt
+  # when: not device_type_data.0.name is defined
+
+# INCLUDE TASK LIST TO CREATE DEVICES
+- name: Create devices (and sites if not provided) within Netbox from inventory sample data
+  include_tasks: incl_devices.yml
+  loop: "{{ devices }}"
+  loop_control:
+    loop_var: device
+

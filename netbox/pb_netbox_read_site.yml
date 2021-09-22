@@ -1,0 +1,10 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  become: False
+  tasks:
+    - include_role:
+        name: netbox_read_site_data
+      vars:
+        site_name: 'site-uros'
+      name: read site data

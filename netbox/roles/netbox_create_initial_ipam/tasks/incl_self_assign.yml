@@ -1,0 +1,93 @@
+# READ INTERFACE DATA FOR DEVICE TO KNOW IF INTERFACE ALL READY HAS IP ASSIGNED
+- name: read device interface data
+  include_role:
+    name: netbox_read_device_int_data
+  vars:
+    device_name: "{{ pfa.device_name }}" # pfa(list) looped by include from inventory prefix_assign
+    int_name: "{{ pfa.interface }}"
+  # register: int_data[0]
+
+# TODO: USE DEVICE READ A LITTLE MORE [DOES IT EXIST, IS THE VLAN ATTACHED ETC.]
+
+# READ PREFIX DATA FOR GIVEN ROLE TO FIND PREFIX TO ASSIGN IPS FROM
+- name: read prefix based upon given role
+  include_role:
+    name: netbox_read_prefix_role
+  vars:
+    prefix_role_name: "{{ pfa.role }}"
+  register: prefix_data
+  # register: prefix_data[0]
+# TODO: CHECK IF `prefix_data[0]` CAN BE USED AND USE IT CONSISTENT IF POSSIBLE
+
+# CREATE A NEW PREFIX AND REGISTER NEW PREFIX
+- name: Get a new /{{ pfa.prefix_length }} inside {{ prefix_data.0.prefix }} within Netbox
+  netbox.netbox.netbox_prefix:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      parent: "{{ prefix_data.0.prefix }}"
+      prefix_length: "{{ pfa.prefix_length }}"
+      status: "reserved"
+    state: present
+    first_available: yes
+  register: new_prefix
+  when: int_data.0.count_ipaddresses == 0
+- name: Set fact `new_prefix`
+  set_fact:
+    new_prefix: "{{ new_prefix.prefix }}"
+  when: int_data.0.count_ipaddresses == 0 # there has not been an ip assigned already
+
+# READ DEVICE DATA TO FIND TENANT AND SITE
+- name: read device data
+  include_role:
+    name: netbox_read_device_data
+  vars:
+    device_name: "{{ pfa.device_name }}"
+
+
+# TODO: BELOW USED TO FETCH PREFIX ASSIGNMENT FROM POOL
+# UPDATE THE NEW PREFIX ASSIGNED EARLIER AND ASIGN SITE SPECIFIC VALUES
+- name: Register new prefix within Netbox from inventory sample data
+  netbox.netbox.netbox_prefix:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      family: 4
+      prefix: "{{ new_prefix.prefix }}"
+      tenant: "{{ device_data.0.tenant.name }}"
+      site: "{{ device_data.0.site }}"
+      vlan: "{{ pfa.vlan }}"
+      status: "active"
+    state: present
+  when: int_data.0.count_ipaddresses == 0
+
+# ASSIGN FIRST AVAILABLE IP TO THE DEVICE AND REGISTER NEW_ASSIGNED_IP
+- name: Attach a new prefix to interfaces
+  netbox.netbox.netbox_ip_address:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      prefix: "{{ new_prefix.prefix }}"
+      assigned_object:
+        name: "{{ pfa.interface }}"
+        device: "{{ pfa.device_name }}"
+    state: new
+  when: int_data.0.count_ipaddresses == 0
+  register: new_assigned_ip
+- name: Set fact `new_assigned_ip`
+  set_fact:
+    new_assigned_ip: "{{ new_assigned_ip.ip_address.address }}"
+  when: int_data.0.count_ipaddresses == 0
+
+# IF DEFINED AS PRIMARY ADJUST SETTING ON DEVICE
+- name: Set primary IP within Netbox
+  netbox.netbox.netbox_device:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ pfa.device_name }}"
+      primary_ip4: "{{ new_assigned_ip }}"
+    state: "present"
+  when:
+    - pfa.primary_ipv4 is defined
+    - int_data.0.count_ipaddresses == 0

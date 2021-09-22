@@ -1,0 +1,5 @@
+---
+vt-ubun_ansible_user_vault: vagrant
+vt-ubun_ansible_pass_vault: vagrant
+junos_ansible_user_vault: root
+junos_ansible_pass_vault: Juniper

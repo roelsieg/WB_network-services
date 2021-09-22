@@ -1,0 +1,11 @@
+---
+- name: read site data
+  include_role:
+    name: netbox_read_site_data
+  vars:
+    site_name: "{{ site.name }}"
+
+- name: Create sites within Netbox from inventory sample data
+  include_role:
+    name: netbox_create_site
+  when: not site_data.name is defined

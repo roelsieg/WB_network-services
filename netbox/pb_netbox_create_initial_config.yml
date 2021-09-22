@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  become: False
+  collections:
+    - netbox.netbox
+  vars:
+    input:
+      file_preamble: "{{ file_preamble }}"
+      # file_preamble: "sample_site"
+  vars_files:
+    - "./provision_data/{{ input.file_preamble }}_initial_organization.yml"
+    - "./provision_data/{{ input.file_preamble }}_initial_devices.yml"
+    - "./provision_data/{{ input.file_preamble }}_initial_ipam.yml"
+    - "./provision_data/{{ input.file_preamble }}_initial_assign.yml"
+  tasks:
+    - name: Create initial organization configs from provisioning file
+      include_role:
+        name: netbox_create_initial_organization
+    - name: Create initial device configs from provisioning file
+      include_role:
+        name: netbox_create_initial_devices
+    - name: Create initial IPAM configs from provisioning file
+      include_role:
+        name: netbox_create_initial_ipam
+

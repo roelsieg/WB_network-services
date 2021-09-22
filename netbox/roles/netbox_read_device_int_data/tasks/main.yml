@@ -1,0 +1,25 @@
+---
+- name: "Device data from Netbox"
+  uri:
+    url: "{{ netbox.apiurl }}/dcim/interfaces/?device={{ device_name }}&name={{ int_name }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.apitoken }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: int_data
+
+# - name: "debug site device_initial"
+#   debug:
+#     msg: "{{ int_data }}"
+
+- name: "setting site_devices variable"
+  set_fact:
+    int_data: "{{ int_data.json.results }}"
+
+# - name: "debug site device after set fact variables"
+#   debug:
+#     msg: "{{ int_data }}"

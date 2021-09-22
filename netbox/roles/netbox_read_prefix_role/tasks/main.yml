@@ -1,0 +1,27 @@
+---
+- name: "Device data from Netbox"
+  uri:
+    url: "{{ netbox.apiurl }}/ipam/prefixes/?role={{ prefix_role_name }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.apitoken }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: prefix_data
+
+# - name: "debug site device_initial"
+#   debug:
+#     msg: "{{ prefix_data }}"
+
+- name: "setting site_devices variable"
+  set_fact:
+    prefix_data: "{{ prefix_data.json.results }}"
+
+# - name: "debug site device after set fact variables"
+#   debug:
+#     msg: "{{ prefix_data }}"
+
+

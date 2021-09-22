@@ -1,0 +1,6 @@
+[vt-ubun]
+vt-ubun ip=10.0.1.10 ansible_ssh_host=10.0.1.10
+
+[junos]
+spine01 ip=10.0.1.2 ansible_ssh_host=10.0.1.2
+spine02 ip=10.0.1.6 ansible_ssh_host=10.0.1.6

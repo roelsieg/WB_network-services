@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  name: netbox_create_initial_devices
+  author: 'KPN/AC'
+  description: 'Create initial deployment for devices in NetBox'
+  min_ansible_version: 2.x
+  license: COPYING
+  platforms:
+    - name: NetBox
+
+dependencies:
+# - role: netbox_debug
+
+collections:
+ - netbox.netbox

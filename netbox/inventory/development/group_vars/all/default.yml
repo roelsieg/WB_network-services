@@ -1,0 +1,7 @@
+---
+variable_all_test: "value"
+
+netbox:
+  apiurl: "http://localhost:8000/api"
+  baseurl: "http://localhost:8000"
+  apitoken: "0123456789abcdef0123456789abcdef01234567"

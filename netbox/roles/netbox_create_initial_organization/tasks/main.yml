@@ -1,0 +1,52 @@
+---
+# CREATE CUSTOM FIELDS IF NOT EXISTING
+- name: Create Fields within Netbox from inventory sample data
+  include_role:
+    name: netbox_create_custom_field
+  loop: "{{ custom_fields }}"
+  loop_control:
+    loop_var: custom_field
+
+# CREATE NECESSARY ELEMENTS TENANT, REGIONS, TAGS ETC.
+- name: Create tenants within Netbox from inventory sample data
+  netbox_tenant:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ tn.tenant_name }}"
+      description: "{{ tn.description }}"
+    state: present
+  loop: "{{ tenants }}"
+  loop_control:
+    loop_var: tn
+
+- name: Create regions within Netbox from inventory sample data
+  netbox_region:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ rg.region_name }}"
+      parent_region: "{{ rg.parent | default(omit) }}"
+    state: present
+  loop: "{{ regions }}"
+  loop_control:
+    loop_var: rg
+
+- name: Create tags
+  netbox_tag:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      name: "{{ tag.tag_name }}"
+      description: "{{ tag.description }}"
+      color: "{{ tag.color }}"
+  loop: "{{ tags }}"
+  loop_control:
+    loop_var: tag
+
+# INCLUDE TASK LIST TO CREATE SITES
+- name: Include tasks to create sites from `provisioning_data`
+  include_tasks: incl_sites.yml
+  loop: "{{ sites }}"
+  loop_control:
+    loop_var: site

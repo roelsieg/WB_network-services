@@ -1,0 +1,70 @@
+---
+tenants:
+  - tenant_name: "Tenant"
+    description: "this is a sample tenant"
+    tags:
+      - "sdwan"
+
+regions:
+  - region_name: "all_locations"
+  - region_name: "offices"
+    parent: "all_locations"
+  - region_name: "datacenters"
+    parent: "all_locations"
+
+sites:
+  - name: SITE_office
+    tenant_name: "Tenant"
+    region_name: "offices"
+    status: "active"
+    facility: company
+    time_zone: "Europe/Amsterdam"
+    # description: description
+    physical_address: "Gravin Beatrixstraat 21, 28005 PH Gouda"
+    latitude: 52.0177
+    longitude: 4.7163
+    # contact_name: name_first
+    # contact_phone: phone
+    # contact_email: site_contact@domain.tld
+    comments: company
+    tags:
+      - name": "office"
+
+tags:
+  - tag_name: "oob"
+    description: "part of out-of-band network"
+    color: "FFA500" # orange
+  - tag_name: "lan"
+    description: "part of a lan network"
+    color: "526636" # dark olive green
+  - tag_name: "wan"
+    description: "part of a wan network"
+    color: "8b0000" # dark red
+  - tag_name: "office"
+    description: "office location"
+    color: "526636" # dark olive green
+  - tag_name: "datacenter"
+    description: "data center location"
+    color: "526636" # dark olive green
+  - tag_name: "default"
+    description: "default value to use"
+    color: "808080" # grey
+  - tag_name: "ntp"
+    description: "used as ntp server"
+    color: "808080" # grey
+
+custom_fields:
+  - name: "ntp_server_01"
+    type: "text"
+    content_types:
+      - "dcim.device"
+    filter_logic: "loose"
+    validation_regex: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)\
+    {3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+  - name: "ntp_server_02"
+    type: "text"
+    content_types:
+      - "dcim.device"
+    filter_logic: "loose"
+    validation_regex: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)\
+    {3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"

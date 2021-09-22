@@ -1,0 +1,129 @@
+---
+# ---- Dependency ----
+- name: Install Git
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+
+
+# ---- Deployment ----
+
+- name: Create phpIPAM source directory
+  file:
+    path: '{{ phpipam_src }}'
+    state: 'directory'
+    owner: '{{ phpipam_user }}'
+    group: '{{ phpipam_group }}'
+    mode: '0750'
+
+- name: Clone phpIPAM source from deploy server
+  git:
+    repo: '{{ phpipam_git_repo }}'
+    dest: '{{ phpipam_git_dest }}'
+    update: yes
+  become: true
+  register: phpipam_register_source
+
+- name: Create phpIPAM destination directory
+  file:
+    path: '{{ item }}'
+    state: 'directory'
+    owner: '{{ phpipam_user }}'
+    group: '{{ phpipam_webserver_user }}'
+    mode: '0750'
+  with_items: [ '{{ phpipam_www }}' ]
+
+- name: install phpipam in /var/www/html
+  synchronize:
+    src: '{{ phpipam_git_dest }}'
+    dest: '/var/www/html/'
+    recursive: yes
+    use_ssh_args: yes
+    rsync_opts:
+      - "--exclude=.git*"
+      - "--chown=www-data:www-data"
+      - "--chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r"
+      #- "-p vagrant"
+  #delegate_to: '{{ansible_hostname}}'
+
+
+
+
+# ---- Configuration ----
+
+- name: Check if phpIPAM configuration exists
+  stat:
+    path: '{{ phpipam_www + "/config.php" }}'
+  register: phpipam_register_configuration
+
+- name: Check if MySQL server is installed
+  stat:
+    path: '/var/lib/mysql'
+  register: phpipam_register_mysql
+
+# - name: Create phpIPAM database user in local MySQL instance
+#   mysql_user:
+#     name: '{{ phpipam_database_user }}'
+#     state: 'present'
+#     password: '{{ phpipam_database_password }}'
+#     priv: '{{ phpipam_database_name }}.*:ALL'
+#     host: 'localhost'
+#   when: phpipam_database_host == 'localhost' and phpipam_register_mysql.stat.exists
+
+- name: Create phpIPAM database in local MySQL instance
+  mysql_db:
+    name: '{{ phpipam_database_name }}'
+    state: 'present'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: phpipam_database_host == 'localhost' and phpipam_register_mysql.stat.exists
+  register: phpipam_register_database_status
+
+- name: Import initial database schema
+  mysql_db:
+    name: '{{ phpipam_database_name }}'
+    state: 'import'
+    target: '{{ phpipam_database_schema }}'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: (phpipam_database_host == 'localhost' and
+         (phpipam_register_database_status is defined and phpipam_register_database_status.changed) and
+         (phpipam_register_configuration is defined and not phpipam_register_configuration.stat.exists))
+
+- name: Configure phpIPAM
+  template:
+    src: 'config.php.j2'
+    dest: '{{ phpipam_www + "/config.php" }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  #when: 
+
+- name: Create import directory
+  file:
+    path: '{{ phpipam_www + "/site/admin/csvupload" }}'
+    state: 'directory'
+    owner: '{{ phpipam_user }}'
+    group: '{{ phpipam_group }}'
+    mode: '0755'
+  #when:
+
+- name: Copy the templates to their respestive destination
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: 'root'
+    group: 'root'
+  with_items:
+    - { src: 'virtualhost.conf.j2', dest: '/etc/nginx/sites-available/{{ server_name }}' }
+  notify:
+    - Restart Nginx
+
+- name: Perform action of the desired files
+  file:
+    src: "{{ item.src | default(omit) }}"
+    dest: "{{ item.dest }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { src: '/etc/nginx/sites-available/{{ server_name }}', dest: '/etc/nginx/sites-enabled/{{ server_name }}', state: 'link' }
+  notify:
+    - Restart Nginx

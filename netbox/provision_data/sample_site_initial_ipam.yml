@@ -1,0 +1,53 @@
+---
+roles:
+  - role_name: "tld-site_subnet_pool"
+    slug: "tld-site_subnet_pool"
+
+prefixes:
+  - cidr: 192.168.0.0/16
+    tenant: "Tenant"
+    description: "resource pool location"
+    role: "tld-site_subnet_pool"
+    site: "SITE_office"
+  - cidr: "192.168.100.0/24"
+    tenant: "Tenant"
+    description: "TLD-SITE-ESXI - VLAN-100"
+    vid: "100"
+    vlan: "TLD-SITE-ESXI"
+    site: "SITE_office"
+    # TODO: DECIDE IF WE WANT TO KEEP INITIAL ASSIGNED IPS SEPARATE OR INLINE LIKE THIS
+    # assign:
+    #   - type: "vlan"
+    #     device: "TLD-SITE-C9410-1"
+  - cidr: "192.168.101.0/24"
+    tenant: "Tenant"
+    description: "TLD-SITE-PRINTER - VLAN-101"
+    vid: "101"
+    vlan: "TLD-SITE-PRINTERS"
+    site: "SITE_office"
+  - cidr: "192.168.102.0/24"
+    tenant: "Tenant"
+    description: "TLD-SITE-SERVER - VLAN-102"
+    vid: "102"
+    vlan: "TLD-SITE-SERVERS"
+    site: "SITE_office"
+  - cidr: "192.168.200.0/24"
+    tenant: "Tenant"
+    description: "SITE-DMZ-MGMT - VLAN-200"
+    vid: "200"
+    vlan: "SITE-DMZ-MGMT"
+    site: "SITE_office"
+    # TODO: DECIDE IF WE WANT TO KEEP INITIAL ASSIGNED IPS SEPARATE OR INLINE LIKE THIS
+    # assign:
+    #   - device: "TLD-SITE-A5545-X-1"
+    #     interface: "po4.200"
+    #     role: "VIP"
+    #     ips:
+    #       - 1
+    #       - 2
+  - cidr: "192.168.201.0/24"
+    tenant: "Tenant"
+    description: "SITE-DMZ-AP - VLAN-201"
+    vid: "201"
+    vlan: "SITE-DMZ-AP"
+    site: "SITE_office"

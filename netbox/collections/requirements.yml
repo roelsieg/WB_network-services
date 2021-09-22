@@ -1,0 +1,7 @@
+---
+# usage: "ansible-galaxy collection install -r requirements.yml"
+collections:
+  # Install collections from Ansible Galaxy.
+  - name: netbox.netbox
+  # Install collections from  Bitbucket
+  # - name: 'git+https://bitbucket.org/itility/ac-nwa-ansible-xxxx'

@@ -1,0 +1,68 @@
+---
+# READ INTERFACE DATA FOR DEVICE TO KNOW IF INTERFACE ALL READY HAS IP ASSIGNED
+- name: read device interface data
+  include_role:
+    name: netbox_read_device_int_data
+  vars:
+    device_name: "{{ pfa.device_name }}" # pfa(list) looped by include from inventory prefix_assign
+    int_name: "{{ pfa.interface }}"
+  # register: int_data[0]
+
+# ASSIGN FIRST AVAILABLE IP TO THE DEVICE AND REGISTER NEW_ASSIGNED_IP
+- name: Attach a new prefix to interfaces
+  netbox.netbox.netbox_ip_address:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      prefix: "{{ pfa.prefix }}"
+      assigned_object:
+        name: "{{ pfa.interface }}"
+        device: "{{ pfa.device_name }}"
+    state: new
+  when:
+    # - int_data.0.count_ipaddresses == 0
+    - not pfa.ips is defined
+  register: new_assigned_ip
+# - name: Set fact `new_assigned_ip`
+#   set_fact:
+#     new_assigned_ip: "{{ new_assigned_ip.ip_address.address }}"
+#   when:
+#     - int_data.0.count_ipaddresses == 0
+#     - not pfa.ips is defined
+
+# ASSIGN SPECIFIC IP(S) TO THE DEVICE AND REGISTER NEW_ASSIGNED_IP
+- name: Attach a new prefix to interfaces
+  netbox.netbox.netbox_ip_address:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      address: "{{ pfa.prefix | ansible.netcommon.ipaddr(ip) }}"
+      assigned_object:
+        name: "{{ pfa.interface }}"
+        device: "{{ pfa.device_name }}"
+    state: new
+  loop: "{{ pfa.ips }}"
+  loop_control:
+    loop_var: ip
+  when:
+    - pfa.ips is defined
+  register: new_assigned_ip
+# - name: Set fact `new_assigned_ip`
+#   set_fact:
+#     new_assigned_ip: "{{ new_assigned_ip.ip_address.address }}"
+#   when:
+#     - pfa.ips is defined
+
+# TODO: CREATE INCLUDE OR LOOP TO FIX , ISSUE MULTIPLE IPS ON INTERFACE
+# IF DEFINED AS PRIMARY ADJUST SETTING ON DEVICE
+# - name: Set primary IP within Netbox
+#   netbox.netbox.netbox_device:
+#     netbox_url: "{{ netbox.baseurl }}"
+#     netbox_token: "{{ netbox.apitoken }}"
+#     data:
+#       name: "{{ pfa.device_name }}"
+#       primary_ip4: "{{ new_assigned_ip }}"
+#     state: "present"
+#   when:
+#     - pfa.primary_ipv4 is defined
+#     - int_data.0.count_ipaddresses == 0

@@ -1,0 +1,21 @@
+---
+# TODO: DECIDE IF WE WANT TO KEEP INITIAL ASSIGNED IPS SEPARATE OR INLINE LIKE THIS
+# See also `SITE_initial_ipam.yml`
+prefix_assign:
+  - device_name: "TLD-SITE-FW5545-X-1"
+    vlan: "SITE-DMZ-MGMT"
+    prefix: "192.168.200.0/24"
+    interface: "po4.200"
+    ips:
+      - 1
+      - 2
+  # - device_name: "TLD-SITE-SW9410-1"
+  #   vlan: "TLD-SITE-ESXI"
+  #   prefix: "192.168.100.0/24"
+  #   interface: "vlan_100"
+  # - device_name: "TLD-SITE-C9410-1"
+  #   vlan: "TLD-SITE-RESERVED"
+  #   vid: 800
+  #   TODO: IF `prefix_length` & `role` DEFINED FETCH NET ASSIGNMENT FROM POOL
+  #   prefix_length: 24
+  #   role: "TLD-SITE_subnet_pool"

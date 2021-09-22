@@ -1,0 +1,57 @@
+---
+- name: Create device types within Netbox from inventory data
+  netbox_device_type:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      slug: "{{ dt.slug }}"
+      model: "{{ dt.model }}"
+      manufacturer: "{{ dt.manufacturer }}"
+      part_number: "{{ dt.part_number | default(omit) }}"
+      u_height: "{{ dt.u_height | default(omit) }}"
+      is_full_depth: "{{ dt.is_full_depth | default(omit) }}"
+    state: present
+
+- name: Create interfaces on device type within Netbox from inventory data
+  netbox_device_interface_template:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      device_type: "{{ dt.slug }}"
+      name: "{{ interface.name }}"
+      type: "{{ interface.type }}"
+      mgmt_only: "{{ interface.mgmt_only }}"
+    state: present
+  loop: "{{ dt.interfaces }}"
+  loop_control:
+    loop_var: interface
+  when: dt.interfaces is defined
+
+- name: Create console port on device type within Netbox from inventory data
+  netbox_console_port_template:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      device_type: "{{ dt.slug }}"
+      name: "{{ console.name }}"
+      type: "{{ console.type }}"
+    state: present
+  loop: "{{ dt.console_ports }}"
+  loop_control:
+    loop_var: console
+  when: dt.console_ports is defined
+
+- name: Create power port on device type within Netbox from inventory data
+  netbox_power_port_template:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      device_type: "{{ dt.slug }}"
+      name: "{{ power.name }}"
+      type: "{{ power.type }}"
+      maximum_draw: "{{ power.maximum_draw | default(omit) }}"
+    state: present
+  loop: "{{ dt.power_ports }}"
+  loop_control:
+    loop_var: power
+  when: dt.power_ports is defined

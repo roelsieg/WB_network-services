@@ -1,0 +1,17 @@
+{
+    "content_types": [
+{%- for content_type in custom_field.content_types %}{{''}}
+        "{{ content_type }}"
+{%- endfor %}{{''}}
+    ],
+    "type": "{{ custom_field.type }}",
+    "name": "{{ custom_field.name }}",
+    "label": "",
+    "description": "",
+    "required": "{{ custom_field.required | default(false) }}",
+{%- if custom_field.validation_regex is defined %}{{ '' }}
+    "validation_regex": "{{ custom_field.validation_regex }}",
+{%- endif %}{{ '' }}
+    "filter_logic": "{{ custom_field.filter_logic | default('loose') }}"
+
+}

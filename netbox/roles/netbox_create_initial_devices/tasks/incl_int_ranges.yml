@@ -1,0 +1,14 @@
+---
+- name: Create interface ranges on device within Netbox from inventory sample data
+  netbox_device_interface:
+    netbox_url: "{{ netbox.baseurl }}"
+    netbox_token: "{{ netbox.apitoken }}"
+    data:
+      device: "{{ device.device_name }}"
+      name: "{{ int_range.int_base_name }}{{ int_number }}"
+      type: "{{ int_range.type }}"
+      enabled: "{{ int_range.enabled }}"
+    state: present
+  loop: "{{ range(int_range.int_range_start,int_range.int_range_stop+1) | list}}"
+  loop_control:
+    loop_var: int_number
